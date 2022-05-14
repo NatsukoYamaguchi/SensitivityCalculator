@@ -74,23 +74,6 @@ def operation_result():
         
         result = input1 * input2 * input3 * input4 * input5 * input6 * input7
         
-        # if operation == "+":
-        #     result = input1 + input2
-        
-        # elif operation == "-":
-        #     result = input1 - input2
-        
-        # elif operation == "/":
-        #     result = input1 / input2
-        
-        # elif operation == "*":
-        #     result = input1 * input2
-            
-        # else:
-        #     operation = "%"
-        #     result = input1 % input2 
-        
-    
         return render_template(
             'index.html', 
             input1=input1, 
