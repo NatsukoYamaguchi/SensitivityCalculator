@@ -45,13 +45,13 @@ def operation_result():
                 calculation_success=False, 
                 error = "Please do not leave any field empty.")
     
-    for i in range(len(inputs)):
-        if type(inputs[i]) != int and type(inputs[i]) != float:
-            return render_template(
-                'index.html',  
-                result="Bad Input", 
-                calculation_success=False, 
-                error = "Please only enter numerical values.")
+    # for i in range(len(inputs)):
+    #     if type(inputs[i]) != int and type(inputs[i]) != float:
+    #         return render_template(
+    #             'index.html',  
+    #             result="Bad Input", 
+    #             calculation_success=False, 
+    #             error = "Please only enter numerical values.")
     
     try: 
         input1 = float(first_input)
@@ -70,7 +70,7 @@ def operation_result():
         elif SEFD_units == "cgs":
             input3 = input3 * (10**(23))
         
-        result = input1 * input2 * input3 * input4 * input5 * input6 * input7    
+        result = input1 * input2 * input3 * input4 * input5 * input6 * input7
     
         return render_template(
             'index.html', 
@@ -107,12 +107,11 @@ def operation_result():
             input4=input4, 
             input5=input5, 
             input6=input6,
-            input7=input7,  
+            input7=input7, 
             result="Bad Input", 
             calculation_success=False, 
             error = "Cannot perform numeric operations with provided inputs.")
     
-     
 
 if __name__ == '__main__':
     Flask_App.debug = True 

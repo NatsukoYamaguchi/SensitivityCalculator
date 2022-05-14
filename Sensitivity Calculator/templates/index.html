@@ -33,10 +33,12 @@ Created on Fri May 13 13:55:21 2022
         </select>
         <br/>
         <label for="Input4">&eta;<sub>Q</sub>:</label>
-        <input type="text" name="Input4" id="Input4">
+        <input type="range" class="form-range" min="0" max="1" step="0.01" id="Input4" name="Input4", oninput="this.nextElementSibling.value = this.value">
+        <output>0.5</output>
         <br/>
         <label for="Input5">n<sub>pol</sub>:</label>
-        <input type="text" name="Input5" id="Input5">
+        <input type="range" class="form-range" min="1" max="10" step="1" id="Input5" name="Input5", oninput="this.nextElementSibling.value = this.value">
+        <output>5</output>
         <br/>
         <label for="Input6">&tau;:</label>
         <input type="text" name="Input6" id="Input6">
