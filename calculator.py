@@ -41,7 +41,6 @@ def operation_result():
         if len(inputs[i]) < 1:
             return render_template(
                 'index.html',  
-                # operation=operation, 
                 result="Bad Input", 
                 calculation_success=False, 
                 error = "Please do not leave any field empty.")
@@ -50,7 +49,6 @@ def operation_result():
         if type(inputs[i]) != int and type(inputs[i]) != float:
             return render_template(
                 'index.html',  
-                # operation=operation, 
                 result="Bad Input", 
                 calculation_success=False, 
                 error = "Please only enter numerical values.")
@@ -96,8 +94,7 @@ def operation_result():
             input4=input4, 
             input5=input5, 
             input6=input6,
-            input7=input7, 
-            # operation=operation, 
+            input7=input7,  
             result="Bad Input", 
             calculation_success=False, 
             error = "You cannot divide by zero")
@@ -112,7 +109,6 @@ def operation_result():
             input5=input5, 
             input6=input6,
             input7=input7, 
-            # operation=operation, 
             result="Bad Input", 
             calculation_success=False, 
             error = "Cannot perform numeric operations with provided inputs.")
