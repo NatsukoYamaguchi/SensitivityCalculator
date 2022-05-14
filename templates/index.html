@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri May 13 13:55:21 2022
+
+@author: natsukoyamaguchi
+"""
+
+{% extends "base.html" %}
+
+{% block content %} 
+    <br></br>
+    <p>* Currently just multiplies all of the values together *</p>
+    <p>Fill out values for the variables below.</p>
+    <p>Click <a href="/variables">here</a> for detials about each variable.</p>
+    <form method="post" action="{{ url_for('operation_result') }}" id="calculator_form">
+        <label for="Input1">S/N:</label>
+        <input type="text" name="Input1" id="Input1">
+        <br/>
+        <label for="Input2">EIRP:</label>
+        <input type="text" name="Input2" id="Input2">
+        <select id="EIRP_units" name="EIRP_units">
+        <option value="mks">W</option>
+        <option value="cgs">ergs/s</sup></option>
+        </select>
+        <br/>
+        <label for="Input3">SEFD:</label>
+        <input type="text" name="Input3" id="Input3">
+        <select id="SEFD_units" name="SEFD_units">
+        <option value="Jy">Jy</option>
+        <option value="mks">W/m2/Hz</option>
+        <option value="cgs">ergs/s/cm2/Hz</option>
+        </select>
+        <br/>
+        <label for="Input4">&eta;<sub>Q</sub>:</label>
+        <input type="text" name="Input4" id="Input4">
+        <br/>
+        <label for="Input5">n<sub>pol</sub>:</label>
+        <input type="text" name="Input5" id="Input5">
+        <br/>
+        <label for="Input6">&tau;:</label>
+        <input type="text" name="Input6" id="Input6">
+        <br/>
+        <label for="Input7">&Delta;f:</label>
+        <input type="text" name="Input7" id="Input7">
+        <br/>
+        <input class="btn btn-primary" type="submit" value="Submit">
+        <a class="btn btn-primary" href="/" role="button">Reset</a>
+    </form>
+    
+    {% if calculation_success == True %}
+        <br/>
+        <h4>Your input:</h4>
+        <h6>S/N: {{input1}}</h6>
+        <h6>EIRP: {{input2}}</h6>
+        <h6>SEFD: {{input3}}</h6>
+        <h6>&eta;<sub>Q</sub>: {{input4}}</h6>
+        <h6>n<sub>pol</sub>: {{input5}}</h6>
+        <h6>&tau;: {{input6}}</h6>
+        <h6>&Delta;f: {{input7}}</h6>
+        <h4>Result: r = <b>{{result}}</b></h4>
+        
+    {% endif %}
+    {% if calculation_success == False %}
+        <br/>
+        <p>{{error}}</p>
+        <h4>Your input:</h4>
+        <h6>S/N: {{input1}}</h6>
+        <h6>EIRP: {{input2}}</h6>
+        <h6>SEFD: {{input3}}</h6>
+        <h6>&eta;<sub>Q</sub>: {{input4}}</h6>
+        <h6>n<sub>pol</sub>: {{input5}}</h6>
+        <h6>&tau;: {{input6}}</h6>
+        <h6>&Delta;f: {{input7}}</h6>
+        <h4>Result: "{{result}}"</h4>
+    {% endif %}
+    
+{% endblock %} 
+
+
+
