@@ -77,7 +77,8 @@ def operation_result():
         
 
         result = m.sqrt((9 * (100**2) * (eirp/(10**13)) * (10/sefd) * (eta) * m.sqrt(npol * tau / freq))/(sn))
-    
+        result = float( '%.2f' % result)
+
         return render_template(
             'index.html', 
             sn=sn, 
