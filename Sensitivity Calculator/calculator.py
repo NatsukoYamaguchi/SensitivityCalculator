@@ -6,6 +6,7 @@ Created on Fri May 13 13:55:02 2022
 @author: natsukoyamaguchi
 """
 from flask import Flask, render_template, request
+import math as m
 
 Flask_App = Flask(__name__)
 
@@ -21,6 +22,10 @@ def variables():
 def intro():
    return render_template('intro.html')
 
+@Flask_App.route('/test/', methods=['GET', 'POST'])
+def test():
+   return render_template('test.html')
+
 @Flask_App.route('/operation_result/', methods=['POST'])
 def operation_result():
     
@@ -28,21 +33,20 @@ def operation_result():
     second_input = request.form['Input2']
     third_input = request.form['Input3']
     fourth_input = request.form['Input4']
-    # fifth_input = request.form['Input5']
     sixth_input = request.form['Input6']
     seventh_input = request.form['Input7']
     
     option = request.form['inlineCheckbox']
     
     if option == 'option1':
-        fifth_input = 1
+        npol = 1
     else:
-        fifth_input = 2
+        npol = 2
     
     EIRP_units = request.form['EIRP_units']
     SEFD_units = request.form['SEFD_units']
     
-    inputs = [first_input, second_input, third_input, fourth_input, sixth_input, seventh_input]
+    inputs = [first_input, second_input, third_input, fourth_input, str(npol), sixth_input, seventh_input]
     
     for i in range(len(inputs)):
         if len(inputs[i]) < 1:
@@ -52,74 +56,66 @@ def operation_result():
                 calculation_success=False, 
                 error = "Please do not leave any field empty.")
     
-    # for i in range(len(inputs)):
-    #     if type(inputs[i]) != int and type(inputs[i]) != float:
-    #         return render_template(
-    #             'index.html',  
-    #             result="Bad Input", 
-    #             calculation_success=False, 
-    #             error = "Please only enter numerical values.")
-    
     try: 
-        input1 = float(first_input)
-        input2 = float(second_input)
-        input3 = float(third_input)
-        input4 = float(fourth_input)
-        input5 = float(fifth_input)
-        input6 = float(sixth_input)
-        input7 = float(seventh_input)
+        sn = float(first_input)
+        eirp = float(second_input)
+        sefd = float(third_input)
+        eta = float(fourth_input)
+        tau = float(sixth_input)
+        freq = float(seventh_input)
         
         if EIRP_units == "cgs":
-            input2 = input2 * (10**(-7))
+            eirp = eirp * (10**(-7))
         elif EIRP_units == "Arecibo":
-            input2 = input2 * (2.2e13)
+            eirp = eirp * (2.2e13)
         
         if SEFD_units == "mks":
-            input3 = input3 * (10**(26))
+            sefd = sefd * (10**(26))
         elif SEFD_units == "cgs":
-            input3 = input3 * (10**(23))
+            sefd = sefd * (10**(23))
         
-        result = input1 * input2 * input3 * input4 * input5 * input6 * input7
+
+        result = m.sqrt((9 * (100**2) * (eirp/(10**13)) * (10/sefd) * (eta) * m.sqrt(npol * tau / freq))/(sn))
     
         return render_template(
             'index.html', 
-            input1=input1, 
-            input2=input2, 
-            input3=input3, 
-            input4=input4, 
-            input5=input5, 
-            input6=input6,
-            input7=input7, 
+            sn=sn, 
+            eirp=eirp, 
+            sefd=sefd, 
+            eta=eta, 
+            npol=npol, 
+            tau=tau,
+            freq=freq, 
             result=result, 
             calculation_success=True)
     
     except ZeroDivisionError:
         return render_template(
             'index.html', 
-            input1=input1, 
-            input2=input2, 
-            input3=input3, 
-            input4=input4, 
-            input5=input5, 
-            input6=input6,
-            input7=input7, 
+            # sn=sn, 
+            # eirp=eirp, 
+            # sefd=sefd, 
+            # eta=eta, 
+            # npol=npol, 
+            # tau=tau,
+            # freq=freq, 
             result="Bad Input", 
             calculation_success=False, 
-            error = "You cannot divide by zero")
+            error = "Zero division error. Please check your entries.")
     
     except ValueError:
         return render_template(
             'index.html', 
-            input1=input1, 
-            input2=input2, 
-            input3=input3, 
-            input4=input4, 
-            input5=input5, 
-            input6=input6,
-            input7=input7, 
+            # sn=sn, 
+            # eirp=eirp, 
+            # sefd=sefd, 
+            # eta=eta, 
+            # npol=npol, 
+            # tau=tau,
+            # freq=freq, 
             result="Bad Input", 
             calculation_success=False, 
-            error = "Cannot perform numeric operations with provided inputs.")
+            error = "Please enter only numerical values.")
     
 
 if __name__ == '__main__':
