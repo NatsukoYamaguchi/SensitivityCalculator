@@ -5,10 +5,11 @@ Created on Fri May 13 13:55:02 2022
 
 @author: natsukoyamaguchi
 """
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 import math as m
 
 Flask_App = Flask(__name__)
+Flask_App.config['SECRET_KEY'] = 'NY725'
 
 @Flask_App.route('/', methods=['GET', 'POST'])
 def index():
@@ -50,11 +51,11 @@ def operation_result():
     
     for i in range(len(inputs)):
         if len(inputs[i]) < 1:
+            flash('Please do not leave any field empty.')
             return render_template(
                 'index.html',  
                 result="Bad Input", 
-                calculation_success=False, 
-                error = "Please do not leave any field empty.")
+                calculation_success=False)
     
     try: 
         sn = float(first_input)
@@ -90,6 +91,7 @@ def operation_result():
             calculation_success=True)
     
     except ZeroDivisionError:
+        flash('Zero division error. Please try again.')
         return render_template(
             'index.html', 
             # sn=sn, 
@@ -100,10 +102,10 @@ def operation_result():
             # tau=tau,
             # freq=freq, 
             result="Bad Input", 
-            calculation_success=False, 
-            error = "Zero division error. Please check your entries.")
+            calculation_success=False)
     
     except ValueError:
+        flash('Please enter only numerical values.')
         return render_template(
             'index.html', 
             # sn=sn, 
@@ -114,8 +116,7 @@ def operation_result():
             # tau=tau,
             # freq=freq, 
             result="Bad Input", 
-            calculation_success=False, 
-            error = "Please enter only numerical values.")
+            calculation_success=False)
     
 
 if __name__ == '__main__':
