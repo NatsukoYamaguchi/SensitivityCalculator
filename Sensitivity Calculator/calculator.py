@@ -28,14 +28,21 @@ def operation_result():
     second_input = request.form['Input2']
     third_input = request.form['Input3']
     fourth_input = request.form['Input4']
-    fifth_input = request.form['Input5']
+    # fifth_input = request.form['Input5']
     sixth_input = request.form['Input6']
     seventh_input = request.form['Input7']
+    
+    option = request.form['inlineCheckbox']
+    
+    if option == 'option1':
+        fifth_input = 1
+    else:
+        fifth_input = 2
     
     EIRP_units = request.form['EIRP_units']
     SEFD_units = request.form['SEFD_units']
     
-    inputs = [first_input, second_input, third_input, fourth_input, fifth_input, sixth_input, seventh_input]
+    inputs = [first_input, second_input, third_input, fourth_input, sixth_input, seventh_input]
     
     for i in range(len(inputs)):
         if len(inputs[i]) < 1:
@@ -64,6 +71,8 @@ def operation_result():
         
         if EIRP_units == "cgs":
             input2 = input2 * (10**(-7))
+        elif EIRP_units == "Arecibo":
+            input2 = input2 * (2.2e13)
         
         if SEFD_units == "mks":
             input3 = input3 * (10**(26))

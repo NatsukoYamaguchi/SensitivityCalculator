@@ -12,7 +12,7 @@ Created on Fri May 13 13:55:21 2022
     <br></br>
     <p>* Currently just multiplies all of the values together *</p>
     <p>Fill out values for the variables below.</p>
-    <p>Click <a href="/variables">here</a> for detials about each variable.</p>
+    <p>Click <a href="/variables">here</a> for details about each variable.</p>
     <form method="post" action="{{ url_for('operation_result') }}" id="calculator_form">
         <label for="Input1">S/N:</label>
         <input type="text" name="Input1" id="Input1">
@@ -20,6 +20,7 @@ Created on Fri May 13 13:55:21 2022
         <label for="Input2">EIRP:</label>
         <input type="text" name="Input2" id="Input2">
         <select id="EIRP_units" name="EIRP_units">
+        <option value="Arecibo">Arecibo</option>
         <option value="mks">W</option>
         <option value="cgs">ergs/s</sup></option>
         </select>
@@ -33,12 +34,18 @@ Created on Fri May 13 13:55:21 2022
         </select>
         <br/>
         <label for="Input4">&eta;<sub>Q</sub>:</label>
-        <input type="range" class="form-range" min="0" max="1" step="0.01" id="Input4" name="Input4", oninput="this.nextElementSibling.value = this.value">
-        <output>0.5</output>
+        <input type="range" class="form-range" min="0" max="1" step="0.0001" value = "0.8825" id="Input4" name="Input4", oninput="this.nextElementSibling.value = this.value">
+        <output>0.8825</output>
         <br/>
         <label for="Input5">n<sub>pol</sub>:</label>
-        <input type="range" class="form-range" min="1" max="10" step="1" id="Input5" name="Input5", oninput="this.nextElementSibling.value = this.value">
-        <output>5</output>
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineCheckbox" id="inlineCheckbox1" value="option1" checked>
+        <label class="form-check-label" for="inlineCheckbox1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineCheckbox" id="inlineCheckbox2" value="option2">
+        <label class="form-check-label" for="inlineCheckbox2">2</label>
+        </div>
         <br/>
         <label for="Input6">&tau;:</label>
         <input type="text" name="Input6" id="Input6">
