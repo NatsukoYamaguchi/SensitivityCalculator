@@ -12,7 +12,8 @@ Created on Fri May 13 13:55:21 2022
     <br></br>
     <p>Uses equation (5) of <a href="https://iopscience.iop.org/article/10.3847/1538-3881/aabb03" target="-blank">Margot et al. 2018</a> to calculate the distance at which signals are detectable as a function of key parameters.</p>
     <p>Please fill out all of the fields below.</p>
-    <p>Click <a href="/variables">here</a> for details about each parameter.</p>
+    <p>Click <a href="/intro">here</a> for an overview of what the signal-to-noise ratio (S/N, SNR) is and why it's important.</p>
+    <p>Click <a href="/variables">here</a> for a list of what each parameter below stands for.</p>
     <form method="post" action="{{ url_for('operation_result') }}" id="calculator_form">
         <label for="Input1">S/N:</label>
         <input type="text" value="10" name="Input1" id="Input1">
@@ -70,6 +71,7 @@ Created on Fri May 13 13:55:21 2022
         <h6>&tau;: {{tau}}</h6>
         <h6>&Delta;f: {{freq}}</h6>
         <h4>This signal is detectable at a distance of <b>{{result}}</b> light years.</h4>
+        <br/>
     {% endif %}
     
 {% endblock %} 
