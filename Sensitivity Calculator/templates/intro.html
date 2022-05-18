@@ -15,9 +15,56 @@ Created on Fri May 13 14:58:51 2022
     <p>As you slowly drive further and further away, your radio will start to misbehave. Depending on where you are and what stations you listen to, the songs you want to hear will start to get mixed in with static, or maybe even sounds from another radio station.</p>
     <p> In other words, the signal you are looking for is getting mixed in with a lot of noise. </p>
     <p> Radio astronomers (and astronomers in general) run into this same problem. Oftentimes, the signals we want to look at, whether those are stars, planets, or aliens, get buried inside tons and tons of noise, from both human-made and natural sources. </p>
+    </br>
     <p><b> What is SNR and why is it important? </b></p>
-    <p> The <b>signal-to-noise ratio (SNR)</b> is the ratio telling us how much of what we detect is coming from our intended source and how much is other noise. More technically, the SNR is the ratio of the powers of the signal/source and the noise, both as detected by the receiver. </p>
+    <p> The <b>signal-to-noise ratio (SNR)</b> is the ratio telling us how much of 
+    what we detect is coming from our intended source and how much is other noise. 
+    More technically, the SNR is the ratio of the powers of the signal/source and the noise, 
+    both as detected by the receiver. </p>
+    <p> Obviously, as SETI astronomers, we don’t know the power of the source. 
+    With that said, SNR is still a useful tool for modeling how well we can detect 
+    signals coming from other places. We can model the types of transmitters other
+    civilizations might have based on our own, and see how well we could detect those signals. </p>
 
+    
+    <p><b> What does SNR depend on? </b></p>
+    <p> SNR depends on a variety of factors, and we will run through them all here. </p> 
+
+    <ol>
+    <p> The first set of factors are characteristics of the receiver and the transmitter. 
+    They depend only on physical characteristics, and have nothing to do with what we do with the data. 
+    These should be understandable by anyone. </p>
+    <li> <b>Distance between transmitter and receiver</b>: As the receiver moves further away, less 
+    power will be delivered from the transmitter. Just like driving away from home in your car, 
+    the signal and noise get mushed together at further distances. </li>
+    <li> <b>Transmitter Power</b>: This one should make sense. If the transmitter is sending out more power, 
+    then more power will be delivered to the receiver and it is more likely that the receiver will 
+    detect the signal over the noise. </li>
+    <li> <b>How good your receiver is</b>: If your receiver is better at picking up signals, 
+    it will pick up more power, which includes more power from your transmitter.</li>
+    </br>
+    <p> The second set of factors are functions of how we collect, analyze, and process the data. 
+    This part gets a bit more technical, unfortunately, so feel free to skip if you’re not interested. <p>
+    <li><b>Quantization efficiency</b>: As we collect data, we assign levels and numbers to it for data analysis. 
+    Here, the number of levels matters. If we had an infinite number of levels, we could retrieve all the observations perfectly, 
+    but storing and analyzing that much data requires an incredible amount of computing power. As we decrease the number of levels, 
+    we retrieve less of the original information, but we can store and analyze more. Quantization efficiency is a measure of how much of the original signal we store.</li>
+    <li><b>Number of polarizations</b>: Polarization refers to the way in which light is oriented as it travels through space. 
+    There are many different ways in which light can be polarized, each of which carries its own information. 
+    The more polarizations we collect, the more information we have, and the higher our signal-to-noise ratio will be.</li>
+    <li><b>Integration time</b>: Integration time is the amount of time that our telescope is pointed at a particular source. 
+    The longer the integration time is, the higher our signal-to-noise ratio will be because we have more information and can more clearly separate the signal from the noise.</li>
+    <li><b>Frequency resolution</b>: In order to identify signals, we want to shift from observing 
+    signals in the time domain to observing them in the frequency domain. 
+    In music, this is similar to saying that rather than knowing the exact pressure levels in your ear as a function of time, 
+    you know that the note you are hearing is a C#. 
+    We make this shift using a mathematical tool called a <a href="https://en.wikipedia.org/wiki/Fourier_transform" target="-blank">Fourier transform</a>.
+    To use a Fourier transform, we get to decide (similar to the quantization efficiency) 
+    how many levels of frequency we want to measure. This is called the frequency resolution, 
+    and in a similar way to the quantization efficiency, a higher frequency resolution will yield a 
+    higher signal-to-noise ratio.</li>
+    </ol>
+    
 
     
 {% endblock %} 
