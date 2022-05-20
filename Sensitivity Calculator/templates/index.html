@@ -11,14 +11,14 @@ Created on Fri May 13 13:55:21 2022
 {% block content %} 
     <br></br>
     <p>Uses equation (5) of <a href="https://iopscience.iop.org/article/10.3847/1538-3881/aabb03" target="-blank">Margot et al. 2018</a> to calculate the distance at which signals are detectable as a function of key parameters.</p>
+    <p>Hover over each parameter to see what they stand for.</p>
     <p>Please fill out all of the fields below.</p>
-    <p>Click <a href="/intro">here</a> for an overview of what the signal-to-noise ratio (S/N, SNR) is and why it's important.</p>
-    <p>Click <a href="/variables">here</a> for a list of what each parameter below stands for.</p>
     <form method="post" action="{{ url_for('operation_result') }}" id="calculator_form">
-        <label for="Input1">S/N:</label>
+        <a href="#" rel="tooltip" title="Signal-to-noise ratio">S/N:</a><b>&nbsp;&nbsp;&nbsp;</b>
         <input type="text" value="10" name="Input1" id="Input1">
         <br/>
-        <label for="Input2">EIRP:</label>
+        <br/>
+        <a href="#" rel="tooltip" title="Effective Isotropic Radiated Power">EIRP:</a><b>&nbsp;</b>
         <input type="text" value="1" name="Input2" id="Input2">
         <select id="EIRP_units" name="EIRP_units">
         <option value="Arecibo">Arecibo</option>
@@ -26,7 +26,8 @@ Created on Fri May 13 13:55:21 2022
         <option value="cgs">ergs/s</sup></option>
         </select>
         <br/>
-        <label for="Input3">SEFD:</label>
+        <br/>
+        <a href="#" rel="tooltip" title="System Equivalent Flux Density">SEFD:</a>
         <input type="text" value="10" name="Input3" id="Input3">
         <select id="SEFD_units" name="SEFD_units">
         <option value="Jy">Jy</option>
@@ -34,11 +35,13 @@ Created on Fri May 13 13:55:21 2022
         <option value="cgs">ergs/s/cm2/Hz</option>
         </select>
         <br/>
-        <label for="Input4">&eta;<sub>Q</sub>:</label>
+        <br/>
+        <a href="#" rel="tooltip" title="Quantization efficiency">&eta;<sub>Q</sub>:</a><b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
         <input type="range" class="form-range" min="0" max="1" step="0.0001" value = "0.8825" id="Input4" name="Input4", oninput="this.nextElementSibling.value = this.value">
         <output>0.8825</output>
         <br/>
-        <label for="Input5">n<sub>pol</sub>:</label>
+        <br/>
+        <a href="#" rel="tooltip" title="Number of Polarizations">n<sub>pol</sub>:</a><b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
         <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" name="inlineCheckbox" id="inlineCheckbox1" value="option1">
         <label class="form-check-label" for="inlineCheckbox1">1</label>
@@ -48,13 +51,16 @@ Created on Fri May 13 13:55:21 2022
         <label class="form-check-label" for="inlineCheckbox2">2</label>
         </div>
         <br/>
-        <label for="Input6">&tau;:</label>
+        <br/>
+        <a href="#" rel="tooltip" title="Integration time">&tau;:</a><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
         <input type="text" value="150" name="Input6" id="Input6">
         <span>s</span>
         <br/>
-        <label for="Input7">&Delta;f:</label>
+        <br/>
+        <a href="#" rel="tooltip" title="Frequency resolution">&Delta;f:</a><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
         <input type="text" value="2.98" name="Input7" id="Input7"> 
         <span>Hz</span>
+        <br/>
         <br/>
         <input class="btn btn-primary" type="submit" value="Submit">
         <a class="btn btn-primary" href="/" role="button">Reset</a>
