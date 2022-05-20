@@ -15,17 +15,9 @@ Flask_App.config['SECRET_KEY'] = 'NY725'
 def index():
     return render_template('index.html')
 
-@Flask_App.route('/variables/', methods=['GET', 'POST'])
-def variables():
-   return render_template('variables.html')
-
 @Flask_App.route('/intro/', methods=['GET', 'POST'])
 def intro():
    return render_template('intro.html')
-
-@Flask_App.route('/test/', methods=['GET', 'POST'])
-def test():
-   return render_template('test.html')
 
 @Flask_App.route('/operation_result/', methods=['POST'])
 def operation_result():
