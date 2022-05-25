@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May 13 14:50:20 2022
-
-@author: natsukoyamaguchi
-"""
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,12 +14,13 @@ Created on Fri May 13 14:50:20 2022
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
-
-    <h1>Sensitivity Calculator</h1>
   </head>
   <body>
-  
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <br>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
+      <a class="navbar-brand" href="#">
+          <img src="https://lh3.googleusercontent.com/vlFpaUGPWWzfhuyspeVo-4D8oIoGSRfTyheuduOAQxinJCFEGUSmizVFND8oul646w_N2jndrSgTDDBAx8WXvW5dke9YJ431gW_U6YEATlLxV2H4-swVwSdTi49Gae93roHEZSYb=w2400" alt="..." height="36">
+      </a>
       <button
         class="navbar-toggler"
         type="button"
@@ -37,11 +31,15 @@ Created on Fri May 13 14:50:20 2022
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
-          <a class="nav-item nav-link" id="intro" href="/intro">Background</a>
-          <a class="nav-item nav-link" id="calculator" href="/">Calculator</a>
+          <a class="nav-item nav-link" id="intro" href={{abspath}}>Background</a>
+          <a class="nav-item nav-link" id="calculator" href="/">Distance-from-SNR calculator</a>
         </div>
       </div>
     </nav>
+    
+    <hr>
+    
+    <h1>&nbsp;&nbsp;SETI Sensitivity Calculator</h1>
     
     <div class="container">{% block content %} {% endblock %}</div>
     
@@ -80,4 +78,3 @@ Created on Fri May 13 14:50:20 2022
   </body>
 
 </html>
-

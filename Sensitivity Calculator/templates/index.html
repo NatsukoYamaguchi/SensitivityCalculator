@@ -1,14 +1,47 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May 13 13:55:21 2022
-
-@author: natsukoyamaguchi
-"""
-
-{% extends "base.html" %}
-
-{% block content %} 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+  <br>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FFFFFF;">
+      <a class="navbar-brand" href="#">
+          <img src="https://lh3.googleusercontent.com/vlFpaUGPWWzfhuyspeVo-4D8oIoGSRfTyheuduOAQxinJCFEGUSmizVFND8oul646w_N2jndrSgTDDBAx8WXvW5dke9YJ431gW_U6YEATlLxV2H4-swVwSdTi49Gae93roHEZSYb=w2400" alt="..." height="36">
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" id="intro" href={{abspath}}>Background</a>
+          <a class="nav-item nav-link" id="calculator" href="/">Distance-from-SNR calculator</a>
+        </div>
+      </div>
+    </nav>
+    
+    <hr>
+    
+    <h1>&nbsp;&nbsp;SETI Sensitivity Calculator</h1>
+    
+    <div class="container">{% block content %} 
     <br></br>
     <p>Uses equation (5) of <a href="https://iopscience.iop.org/article/10.3847/1538-3881/aabb03" target="-blank">Margot et al. 2018</a> to calculate the distance at which signals are detectable as a function of key parameters.</p>
     <p>Hover over each parameter to see what they stand for.</p>
@@ -21,7 +54,7 @@ Created on Fri May 13 13:55:21 2022
         <a href="#" rel="tooltip" title="Effective Isotropic Radiated Power">EIRP:</a><b>&nbsp;</b>
         <input type="text" value="1" name="Input2" id="Input2">
         <select id="EIRP_units" name="EIRP_units">
-        <option value="Arecibo">Arecibo</option>
+        <option value="Arecibo">Arecibo planetary radar equivalent (2.2e13 W)</option>
         <option value="mks">W</option>
         <option value="cgs">ergs/s</sup></option>
         </select>
@@ -37,8 +70,20 @@ Created on Fri May 13 13:55:21 2022
         <br/>
         <br/>
         <a href="#" rel="tooltip" title="Quantization efficiency">&eta;<sub>Q</sub>:</a><b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
-        <input type="range" class="form-range" min="0" max="1" step="0.0001" value = "0.8825" id="Input4" name="Input4", oninput="this.nextElementSibling.value = this.value">
+<!-- this block for pull-down menu with four values
+        <input type="text" list="defaults" id="Input4" name="Input4", oninput="this.nextElementSibling.value = this.value">
+        <datalist id="defaults">
+            <option value="0.6366">1 bit</option>
+            <option value="0.8825">2 bit</option>
+            <option value="0.9985">4 bit</option>
+            <option value="0.9999">8 bit</option>
+        </datalist>
+-->
+<!-- this block for slider with default value
+	<input type="range" class="form-range" min="0" max="1" step="0.0001" value = "0.8825" id="Input4" name="Input4", oninput="this.nextElementSibling.value = this.value">
         <output>0.8825</output>
+-->
+	<input type="text" value="0.8825" name="Input4" id="Input4"> Common values: 0.6366 (1 bit, 2 levels), 0.8825 (2 bit, 4 levels) 0.9885 (4 bit, 16 levels), 0.9999 (8 bit, 256 levels).
         <br/>
         <br/>
         <a href="#" rel="tooltip" title="Number of Polarizations">n<sub>pol</sub>:</a><b>&nbsp;&nbsp;&nbsp;&nbsp;</b>
@@ -80,7 +125,40 @@ Created on Fri May 13 13:55:21 2022
         <br/>
     {% endif %}
     
-{% endblock %} 
+{% endblock %} </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} 
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+    
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script type="text/javascript">
+    $(function () {
+        $("[rel='tooltip']").tooltip();
+    });
+    </script>
+    
+  </body>
 
-
-
+</html>

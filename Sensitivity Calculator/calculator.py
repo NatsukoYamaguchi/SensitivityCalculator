@@ -7,19 +7,26 @@ Created on Fri May 13 13:55:02 2022
 """
 from flask import Flask, render_template, request, flash
 import math as m
+import os.path
+
+file_dir = os.path.dirname(__file__)
+intro_route = os.path.join(file_dir, '/intro/')
+operation_result_route = os.path.join(file_dir, '/operation_result/')
 
 Flask_App = Flask(__name__)
 Flask_App.config['SECRET_KEY'] = 'NY725'
 
 @Flask_App.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html',
+                           abspath = intro_route)
 
-@Flask_App.route('/intro/', methods=['GET', 'POST'])
+@Flask_App.route(intro_route, methods=['GET', 'POST'])
 def intro():
-   return render_template('intro.html')
+   return render_template('intro.html',
+                          abspath = intro_route)
 
-@Flask_App.route('/operation_result/', methods=['POST'])
+@Flask_App.route(operation_result_route, methods=['POST'])
 def operation_result():
     
     first_input = request.form['Input1']
@@ -46,6 +53,7 @@ def operation_result():
             flash('Please do not leave any field empty.')
             return render_template(
                 'index.html',  
+                abspath = intro_route,
                 result="Bad Input", 
                 calculation_success=False)
     
@@ -56,6 +64,15 @@ def operation_result():
         eta = float(fourth_input)
         tau = float(sixth_input)
         freq = float(seventh_input)
+        
+        if(eta < 0 or eta > 1):
+            flash('Quantization efficiency needs to be between 0 and 1. Please try again.')
+            return render_template(
+                'index.html', 
+                abspath = intro_route,
+                result="Bad Input", 
+                calculation_success=False)
+        
         
         if EIRP_units == "cgs":
             eirp = eirp * (10**(-7))
@@ -73,6 +90,7 @@ def operation_result():
 
         return render_template(
             'index.html', 
+            abspath = intro_route,
             sn=sn, 
             eirp=eirp, 
             sefd=sefd, 
@@ -87,13 +105,7 @@ def operation_result():
         flash('Zero division error. Please try again.')
         return render_template(
             'index.html', 
-            # sn=sn, 
-            # eirp=eirp, 
-            # sefd=sefd, 
-            # eta=eta, 
-            # npol=npol, 
-            # tau=tau,
-            # freq=freq, 
+            abspath = intro_route,
             result="Bad Input", 
             calculation_success=False)
     
@@ -101,13 +113,7 @@ def operation_result():
         flash('Please enter only numerical values.')
         return render_template(
             'index.html', 
-            # sn=sn, 
-            # eirp=eirp, 
-            # sefd=sefd, 
-            # eta=eta, 
-            # npol=npol, 
-            # tau=tau,
-            # freq=freq, 
+            abspath = intro_route,
             result="Bad Input", 
             calculation_success=False)
     
@@ -117,4 +123,3 @@ if __name__ == '__main__':
     Flask_App.run()
 
     
-
